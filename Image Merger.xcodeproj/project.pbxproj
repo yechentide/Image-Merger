@@ -13,6 +13,8 @@
 		4EFB5E1824DD898C00DD6F51 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EFB5E1624DD898C00DD6F51 /* Main.storyboard */; };
 		4EFB5E1A24DD898C00DD6F51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EFB5E1924DD898C00DD6F51 /* Assets.xcassets */; };
 		4EFB5E1D24DD898C00DD6F51 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EFB5E1B24DD898C00DD6F51 /* LaunchScreen.storyboard */; };
+		4EFB5E2A24DD97FD00DD6F51 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFB5E2824DD97FD00DD6F51 /* ImageCell.swift */; };
+		4EFB5E2B24DD97FD00DD6F51 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EFB5E2924DD97FD00DD6F51 /* ImageCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		4EFB5E1924DD898C00DD6F51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4EFB5E1C24DD898C00DD6F51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4EFB5E1E24DD898C00DD6F51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4EFB5E2824DD97FD00DD6F51 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		4EFB5E2924DD97FD00DD6F51 /* ImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 				4EFB5E1224DD898C00DD6F51 /* SceneDelegate.swift */,
 				4EFB5E1424DD898C00DD6F51 /* ViewController.swift */,
 				4EFB5E1624DD898C00DD6F51 /* Main.storyboard */,
+				4EFB5E2824DD97FD00DD6F51 /* ImageCell.swift */,
+				4EFB5E2924DD97FD00DD6F51 /* ImageCell.xib */,
 				4EFB5E1924DD898C00DD6F51 /* Assets.xcassets */,
 				4EFB5E1B24DD898C00DD6F51 /* LaunchScreen.storyboard */,
 				4EFB5E1E24DD898C00DD6F51 /* Info.plist */,
@@ -126,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EFB5E1D24DD898C00DD6F51 /* LaunchScreen.storyboard in Resources */,
+				4EFB5E2B24DD97FD00DD6F51 /* ImageCell.xib in Resources */,
 				4EFB5E1A24DD898C00DD6F51 /* Assets.xcassets in Resources */,
 				4EFB5E1824DD898C00DD6F51 /* Main.storyboard in Resources */,
 			);
@@ -139,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EFB5E1524DD898C00DD6F51 /* ViewController.swift in Sources */,
+				4EFB5E2A24DD97FD00DD6F51 /* ImageCell.swift in Sources */,
 				4EFB5E1124DD898C00DD6F51 /* AppDelegate.swift in Sources */,
 				4EFB5E1324DD898C00DD6F51 /* SceneDelegate.swift in Sources */,
 			);
