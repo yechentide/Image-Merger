@@ -61,10 +61,16 @@ class ViewController: UIViewController {
     }
     
     @objc func mergeImages(_ sender: UIBarButtonItem) {
-        imgList.removeLast()
-        guard !imgList.isEmpty else {
+        
+        guard imgList.count>1 else {
+            let alert = UIAlertController(title: "注意", message: "画像を追加してください", preferredStyle: .alert)
+            alert.addAction(
+                UIAlertAction(title: "OK", style: .default, handler: nil)
+            )
+            self.present(alert, animated: true, completion: nil)
             return
         }
+        imgList.removeLast()
         
         // https://qiita.com/rh_/items/7a22f1863355f0e0ccf6
         
@@ -92,9 +98,10 @@ class ViewController: UIViewController {
         
         UIImageWriteToSavedPhotosAlbum(newImage, self, nil, nil)
         imgList.removeAll()
+        imgList.append(UIImage(named: "add")!)
         collectionView.reloadData()
         
-        let alert = UIAlertController(title: "画像保存", message: "カメラロールに保存しました", preferredStyle: .alert)
+        let alert = UIAlertController(title: "お知らせ", message: "カメラロールに保存しました", preferredStyle: .alert)
         alert.addAction(
             UIAlertAction(title: "OK", style: .default, handler: nil)
         )
