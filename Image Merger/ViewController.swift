@@ -48,15 +48,20 @@ class ViewController: UIViewController {
         
         // collectionView.allowsMultipleSelection = true
         editBtn.target = self
-        editBtn.action = #selector(editAAA(_:))
+        editBtn.action = #selector(changeEditMode(_:))
+        mergeBtn.target = self
+        mergeBtn.action = #selector(mergeImages(_:))
     }
 
-    @objc func editAAA(_ sender: UIBarButtonItem) {
-        
+    @objc func changeEditMode(_ sender: UIBarButtonItem) {
         self.isEditMode = !self.isEditMode
         print("editMode = \(isEditMode)")
-        /*let title = self.isEditMode ? "完了" : "編集"
-        sender.title = title*/
+        let title = self.isEditMode ? "完了" : "編集"
+        sender.title = title
+    }
+    
+    @objc func mergeImages(_ sender: UIBarButtonItem) {
+        
     }
 
 }
@@ -92,11 +97,20 @@ extension ViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected: \(indexPath.row)")
         
-        let picker = UIImagePickerController()
-        picker.sourceType = .photoLibrary
-        picker.delegate = self
-        // picker.mediaTypes = ["public.image", "public.movie"]
-        self.present(picker, animated: true, completion: nil)
+        if isEditMode {
+            isEditMode = false
+            editBtn.title = "編集"
+            if indexPath.row != (list.count-1) {
+                list.remove(at: indexPath.row)
+                collectionView.reloadData()
+            }
+        } else {
+            let picker = UIImagePickerController()
+            picker.sourceType = .photoLibrary
+            picker.delegate = self
+            // picker.mediaTypes = ["public.image", "public.movie"]
+            self.present(picker, animated: true, completion: nil)
+        }
         
     }
     
@@ -147,8 +161,7 @@ extension UIView {
         if self.layer.animation(forKey: "VibrateAnimationKey") != nil {
             return
         }
-        let animation: CABasicAnimation
-        animation = CABasicAnimation(keyPath: "transform.rotation")
+        let animation = CABasicAnimation(keyPath: "transform.rotation")
         animation.beginTime = isSync ? 0.0 : Double( Int.random(in: 1...10) ) * 0.1
         animation.isRemovedOnCompletion = false
         animation.duration = speed

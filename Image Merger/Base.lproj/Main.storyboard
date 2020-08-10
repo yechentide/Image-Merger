@@ -48,7 +48,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="C0Y-YN-rb0">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="wft-tS-1aw"/>
+                        <barButtonItem key="leftBarButtonItem" title="編集" id="wft-tS-1aw"/>
                         <barButtonItem key="rightBarButtonItem" title="merge" id="vaP-jZ-vIc"/>
                     </navigationItem>
                     <connections>
