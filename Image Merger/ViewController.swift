@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var editBtn: UIBarButtonItem!
     @IBOutlet weak var mergeBtn: UIBarButtonItem!
     
-    var list = [UIImage]()
+    var imgList = [UIImage]()
     var isEditMode = false {
         didSet {
             self.collectionView.reloadData()
@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        list.append(UIImage(named: "add")!)
+        imgList.append(UIImage(named: "add")!)
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -61,8 +61,47 @@ class ViewController: UIViewController {
     }
     
     @objc func mergeImages(_ sender: UIBarButtonItem) {
+        imgList.removeLast()
+        guard !imgList.isEmpty else {
+            return
+        }
         
+        // https://qiita.com/rh_/items/7a22f1863355f0e0ccf6
+        
+        var newWidth: CGFloat = 0
+        var newHeight: CGFloat = 0
+        imgList.forEach {
+            if $0.size.width > newWidth {
+                newWidth = $0.size.width
+            }
+            newHeight += $0.size.height
+        }
+        let imgSize = CGSize(width: newWidth, height: newHeight)
+        
+        
+        var yPos: CGFloat = 0
+        UIGraphicsBeginImageContextWithOptions(imgSize, false, 0.0)
+        imgList.forEach {
+            let xPos = (imgSize.width - $0.size.width) / 2
+            $0.draw(in: CGRect(x: xPos, y: yPos, width: $0.size.width, height: $0.size.height))
+            yPos += $0.size.height
+        }
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        
+        UIImageWriteToSavedPhotosAlbum(newImage, self, nil, nil)
+        imgList.removeAll()
+        collectionView.reloadData()
+        
+        let alert = UIAlertController(title: "画像保存", message: "カメラロールに保存しました", preferredStyle: .alert)
+        alert.addAction(
+            UIAlertAction(title: "OK", style: .default, handler: nil)
+        )
+        self.present(alert, animated: true, completion: nil)
     }
+    
+    
 
 }
 
@@ -70,14 +109,14 @@ class ViewController: UIViewController {
 /* Data Source */
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return list.count
+        return imgList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
         
         if let cell = cell as? ImageCell {
-            cell.setImage(img: list[indexPath.row])
+            cell.setImage(img: imgList[indexPath.row])
         }
         
         if self.isEditMode {
@@ -100,8 +139,8 @@ extension ViewController: UICollectionViewDelegate {
         if isEditMode {
             isEditMode = false
             editBtn.title = "編集"
-            if indexPath.row != (list.count-1) {
-                list.remove(at: indexPath.row)
+            if indexPath.row != (imgList.count-1) {
+                imgList.remove(at: indexPath.row)
                 collectionView.reloadData()
             }
         } else {
@@ -127,10 +166,10 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
             if let selectedImage = info[.originalImage] as? UIImage {
                 
                 
-                if indexPath[0].row==list.count-1 {
-                    list.append(UIImage(named: "add")!)
+                if indexPath[0].row==imgList.count-1 {
+                    imgList.append(UIImage(named: "add")!)
                 }
-                list[indexPath[0].row] = selectedImage
+                imgList[indexPath[0].row] = selectedImage
                 collectionView.reloadData()
                 
                 
